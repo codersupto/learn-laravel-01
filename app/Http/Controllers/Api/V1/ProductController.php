@@ -4,19 +4,22 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductPostRequest;
+use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Ramsey\Uuid\Uuid;
 
 class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index()
     {
-        //
+        return ProductResource::collection(Product::all());
     }
 
     /**
@@ -33,11 +36,18 @@ class ProductController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return ProductPostRequest|Request|\Illuminate\Http\Response
+     * @return array
      */
     public function store(ProductPostRequest $request)
     {
-        return $request;
+        $product = Product::create([
+            'uuid' => Uuid::uuid6()->toString(),
+            'title' => $request->get('title'),
+            'description' => $request->get('description'),
+            'price' => $request->get('price'),
+            'imageUrl' => $request->get('imageUrl'),
+        ]);
+        return $this->returnProductWithSlug($product);
     }
 
     /**
@@ -83,5 +93,10 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         //
+    }
+
+    private function returnProductWithSlug(Product $product): array
+    {
+        return array_merge($product->toArray(), ['slug' => Str::slug($product->title) . '-' . $product->uuid]);
     }
 }
