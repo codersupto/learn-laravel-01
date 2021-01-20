@@ -4,14 +4,10 @@ namespace Database\Factories;
 
 use App\Models\UtilsTesting;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Carbon;
 
 class UtilsTestingFactory extends Factory
 {
-    /**
-     * The name of the factory's corresponding model.
-     *
-     * @var string
-     */
     protected $model = UtilsTesting::class;
 
     /**
@@ -22,7 +18,9 @@ class UtilsTestingFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'user_uuid' => '',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
         ];
     }
 }

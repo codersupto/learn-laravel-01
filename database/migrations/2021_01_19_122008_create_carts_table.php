@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUtilsTestingsTable extends Migration
+class CreateCartsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class CreateUtilsTestingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('utils_testings', function (Blueprint $table) {
+        Schema::create('carts', function (Blueprint $table) {
             $table->id();
-            $table->char('user_uuid', 36)->unique();
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ class CreateUtilsTestingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('utils_testings');
+        Schema::dropIfExists('carts');
     }
 }

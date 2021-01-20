@@ -17,3 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::resource('utils', \App\Http\Controllers\UtilsTestingController::class);
+Route::apiResource('products', \App\Http\Controllers\ProductController::class)->only('index');
+
+
+Route::get('cart-items', [\App\Http\Controllers\CartController::class, 'index']);
+Route::post('add-to-cart', [\App\Http\Controllers\CartController::class, 'addToCart']);

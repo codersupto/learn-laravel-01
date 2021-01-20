@@ -14,9 +14,9 @@ class UtilsTestingController extends Controller
      *
      * @return string
      */
-    public function index()
+    public function index(): string
     {
-        return Uuid::uuid6()->getInteger();
+        return UtilsTesting::all();
     }
 
     /**
@@ -24,7 +24,7 @@ class UtilsTestingController extends Controller
      *
      * @return Response
      */
-    public function create()
+    public function create(): Response
     {
         //
     }
@@ -33,11 +33,11 @@ class UtilsTestingController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return Response
+     * @return UtilsTesting
      */
-    public function store(Request $request)
+    public function store(Request $request): UtilsTesting
     {
-        //
+        return UtilsTesting::create(['user_uuid' => null]);
     }
 
     /**

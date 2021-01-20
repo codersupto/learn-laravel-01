@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUtilsTestingsTable extends Migration
+class CreateProductsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,14 @@ class CreateUtilsTestingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('utils_testings', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->char('user_uuid', 36)->unique();
+            $table->uuid('uuid')->unique();
+            $table->string('title');
+            $table->string('slug')->unique();
+            $table->string('image');
+            $table->longText('description');
+            $table->integer('price');
             $table->timestamps();
         });
     }
@@ -27,6 +32,6 @@ class CreateUtilsTestingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('utils_testings');
+        Schema::dropIfExists('products');
     }
 }

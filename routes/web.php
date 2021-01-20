@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,7 +15,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+
+//    Cart::add('293ad', 'Product 1', 1, 9, ['size' => 'large'])->associate(Product::class);
+//    Cart::add('293ae', 'Product 2', 2, 9, ['size' => 'large'])->associate(Product::class);
+
+
+    return Cart::content();
+//    foreach(Cart::content() as $row) {
+//        echo 'You have ' . $row->qty . ' items of ' . $row->model->name . ' with description: "' . $row->model->description . '" in your cart.';
+//    }
+
+
 });
 
-Route::get('/utils-tests', [\App\Http\Controllers\UtilsTestingController::class, 'index']);
