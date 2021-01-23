@@ -14,5 +14,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return \Illuminate\Support\Facades\Mail::to('developersuptop@gmail.com')->send(new \App\Mail\SesMail());
 });
